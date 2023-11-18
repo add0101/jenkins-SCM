@@ -8,9 +8,9 @@ pipeline {
 			environment {
 				LOG_LEVEL="INFO"
 			}
-			#steps {
-			#	echo "Building releases ${RELEASE} with log level ${LOG_LEVEL}"
-			#}
+			//steps {
+			//	echo "Building releases ${RELEASE} with log level ${LOG_LEVEL}"
+			//}
 			parallel {
 				stage("Linux-arm64") {
 					steps {

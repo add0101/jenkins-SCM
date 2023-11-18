@@ -30,11 +30,12 @@ pipeline {
 				echo "Deploying release ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
 			}
 		}
+	}
 	post {
 		always {
 			echo "Print whatever deploy happened or not, success of failure"
 		}
 	}
 
-}
+
 }

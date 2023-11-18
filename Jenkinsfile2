@@ -1,0 +1,46 @@
+
+pipeline {
+	agent any
+	environment {
+		RELEASE='20.04'
+	}
+	stages {
+		stage("Build") {
+			environment {
+				LOG_LEVEL="INFO"
+			}
+			steps {
+				echo "Building releases ${RELEASE} with log level ${LOG_LEVEL}"
+			}
+		
+		}
+		stage("Test") {
+			steps {
+				echo "Testing. I can see release ${RELEASE}"
+				writeFile file: "test-result.txt", text: 'passed'
+				}
+		}
+		//stage("Deploy") {
+		//	input {
+		//		message 'Deploy'
+		//		ok 'Do it'
+		//		parameters {
+		//			string(name: "TARGET_ENVIRONMENT", defaultValue: "PROD", description: "Target deployment environment")
+		//		}
+		//	}
+		//	steps {
+		//		echo "Deploying release ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
+		//	}
+		//}
+	}
+	post {
+		success {
+			archivefacts "test-result.txt"
+		}
+		//always {
+		//	echo "Print whatever deploy happened or not, success of failure"
+		//}
+	}
+
+
+}
